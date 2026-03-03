@@ -1,3 +1,24 @@
+/* هذا الكود يطبق فقط عندما تكون لغة الصفحة عربية */
+html[lang="ar"] body {
+    direction: rtl; /* تغيير اتجاه الصفحة بالكامل */
+    text-align: right;
+}
+
+html[lang="ar"] .nav-links {
+    display: flex;
+    flex-direction: row-reverse; /* عكس ترتيب الروابط */
+    gap: 20px;
+}
+
+html[lang="ar"] .timeline-item {
+    border-right: 2px solid #00d2ff; /* نقل الخط لليمين */
+    border-left: none;
+    padding-right: 20px;
+    padding-left: 0;
+    text-align: right;
+}
+
+
 /* Variables for Theme (Dark Neon Theme) */
 :root {
   --bg-color: #1a1725;
@@ -775,3 +796,4 @@ html {
     margin: 0 auto;
   }
 }
+
