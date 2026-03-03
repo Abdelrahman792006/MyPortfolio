@@ -4,20 +4,43 @@ html[lang="ar"] body {
     text-align: right;
 }
 
-html[lang="ar"] .nav-links {
-    display: flex;
-    flex-direction: row-reverse; /* عكس ترتيب الروابط */
-    gap: 20px;
+/* إصلاحات خاصة باللغة العربية فقط */
+html[lang="ar"] {
+    direction: rtl; /* توجيه الصفحة من اليمين لليسار */
 }
 
-html[lang="ar"] .timeline-item {
+/* 1. إصلاح القائمة المتداخلة (Nav Links) */
+html[lang="ar"] .nav-links {
+    display: flex;
+    flex-direction: column; /* لجعلهم تحت بعض كما في الصورة ولكن بشكل مرتب */
+    align-items: center;
+    gap: 15px;
+    left: auto; /* إلغاء أي تموضع يسار */
+    right: 50%; /* توسيطهم بالنسبة لليمين */
+    transform: translateX(50%);
+}
+
+/* 2. إصلاح الخط الزمني (Timeline) - صورة image_55db1f.png */
+html[lang="ar"] .experience-container {
     border-right: 2px solid #00d2ff; /* نقل الخط لليمين */
     border-left: none;
-    padding-right: 20px;
-    padding-left: 0;
+    margin-right: 20px;
+    margin-left: 0;
     text-align: right;
 }
 
+html[lang="ar"] .timeline-dot {
+    right: -10px; /* نقل النقطة لليمين */
+    left: auto;
+}
+
+/* 3. إصلاح النصوص المقلوبة (مثل عبد الرحمن مرحبا) */
+html[lang="ar"] .hero-text h1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 5px;
+}
 
 /* Variables for Theme (Dark Neon Theme) */
 :root {
@@ -796,4 +819,5 @@ html {
     margin: 0 auto;
   }
 }
+
 
