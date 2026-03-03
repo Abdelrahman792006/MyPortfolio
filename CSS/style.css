@@ -1,45 +1,83 @@
-/* هذا الكود يطبق فقط عندما تكون لغة الصفحة عربية */
-html[lang="ar"] body {
-    direction: rtl; /* تغيير اتجاه الصفحة بالكامل */
-    
-}
+/* =========================================
+   إصلاحات وتنسيقات اللغة العربية (RTL)
+========================================= */
 
-/* إصلاحات خاصة باللغة العربية فقط */
+/* التوجيه الأساسي للصفحة */
 html[lang="ar"] {
-    direction: rtl; /* توجيه الصفحة من اليمين لليسار */
-}
-
-/* 1. إصلاح القائمة المتداخلة (Nav Links) */
-html[lang="ar"] .nav-links {
-    display: flex;
-    flex-direction: column; /* لجعلهم تحت بعض كما في الصورة ولكن بشكل مرتب */
-    align-items: center;
-    gap: 15px;
-    left: auto; /* إلغاء أي تموضع يسار */
-    right: 50%; /* توسيطهم بالنسبة لليمين */
-    transform: translateX(50%);
-}
-
-/* 2. إصلاح الخط الزمني (Timeline) - صورة image_55db1f.png */
-html[lang="ar"] .experience-container {
-    border-right: 2px solid #00d2ff; /* نقل الخط لليمين */
-    border-left: none;
-    margin-right: 20px;
-    margin-left: 0;
+    direction: rtl;
     text-align: right;
 }
 
+/* 1. إصلاح القائمة العلوية (Navbar) في وضع الموبايل */
+@media (max-width: 768px) {
+    html[lang="ar"] .nav-links {
+        left: 0; 
+        right: 0; /* جعلها تمتد على العرض بالكامل بدلاً من إزاحتها */
+        transform: translateY(-100%); /* الإخفاء للأعلى */
+    }
+
+    html[lang="ar"] .nav-links.active {
+        transform: translateY(0); /* الظهور عند النقر */
+    }
+}
+
+/* 2. إصلاح الخط الزمني (Timeline) ليتوافق مع اليمين واليسار */
+html[lang="ar"] .timeline::after {
+    left: auto;
+    right: 50%;
+    transform: translateX(50%); /* لضمان توسط الخط تماماً في المنتصف */
+}
+
+html[lang="ar"] .timeline-item {
+    text-align: right;
+}
+
+/* العنصر الفردي (يمين الخط في العربية) */
+html[lang="ar"] .timeline-item:nth-child(odd) {
+    left: auto;
+    right: 0;
+}
+
+/* العنصر الزوجي (يسار الخط في العربية) */
+html[lang="ar"] .timeline-item:nth-child(even) {
+    left: auto;
+    right: 50%;
+}
+
+/* إصلاح أماكن النقاط (Dots) على الخط الزمني */
 html[lang="ar"] .timeline-dot {
-    right: -10px; /* نقل النقطة لليمين */
+    right: auto;
+    left: -8px; /* للعناصر الزوجية */
+}
+
+html[lang="ar"] .timeline-item:nth-child(odd) .timeline-dot {
+    right: -8px; /* للعناصر الفردية */
     left: auto;
 }
 
-/* 3. إصلاح النصوص المقلوبة (مثل عبد الرحمن مرحبا) */
-html[lang="ar"] .hero-text h1 {
+/* 3. إصلاح النصوص والاتجاهات في قسم البطل (Hero Section) */
+html[lang="ar"] .hero-content h1,
+html[lang="ar"] .hero-content h2 {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    gap: 5px;
+    gap: 8px; /* مسافة بسيطة بين الكلمات لمنع التداخل */
+}
+
+/* 4. إصلاح هوامش الأيقونات (Icons Margins) لتبدو صحيحة في العربية */
+html[lang="ar"] .contact-info i {
+    margin-right: 0;
+    margin-left: 10px; /* نقل المسافة لليسار */
+}
+
+html[lang="ar"] .social-links a {
+    margin-right: 0;
+    margin-left: 10px; /* نقل المسافة لليسار */
+}
+
+/* عكس اتجاه الأسهم أو الأيقونات التي تحتاج لذلك (مثل زر العودة للأعلى) */
+html[lang="ar"] #backToTop i {
+    transform: scaleX(1); /* إذا كان هناك سهم لليمين/اليسار استخدم scaleX(-1) لقلبه */
 }
 
 /* Variables for Theme (Dark Neon Theme) */
@@ -819,6 +857,7 @@ html {
     margin: 0 auto;
   }
 }
+
 
 
 
